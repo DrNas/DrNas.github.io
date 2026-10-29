@@ -3,49 +3,119 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Manas Bafna</title>
-<meta name="description" content="Manas Bafna — home of the Funding Markets Monitor, a free dashboard of US repo and funding-market data.">
+<title>Funding Markets Monitor · Manas Bafna</title>
+<meta name="description" content="A free daily dashboard of the US repo and money markets: SOFR, GC repo, IORB, Treasury issuance, bank reserves and the Fed's balance sheet.">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2104381144893771"
      crossorigin="anonymous"></script>
 <style>
-:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--blue:#58a6ff}
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--text:#e6edf3;--muted:#8b949e;--blue:#58a6ff;--btn:#1f6feb;--green:#3fb950;--red:#f85149}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
-main{max-width:760px;margin:0 auto;padding:48px 16px 64px}
-h1{font-size:28px;margin:0 0 4px}
-h2{font-size:18px;margin:32px 0 8px}
-p{margin:0 0 12px}
-.muted{color:var(--muted)}
-a{color:var(--blue);text-decoration:none}
-a:hover{text-decoration:underline}
-.card{display:block;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:20px 0;color:var(--text)}
-.card:hover{border-color:var(--blue);text-decoration:none}
-.card b{font-size:17px}
-ul{padding-left:20px;margin:0 0 12px}
-footer{margin-top:48px;font-size:13px;color:var(--muted)}
+a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
+main{max-width:980px;margin:0 auto;padding:0 16px 56px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0;color:var(--muted);font-size:14px}
+.top b{color:var(--text)}
+.hero{text-align:center;padding:56px 0 36px;background:radial-gradient(ellipse at 50% 0%,rgba(31,111,235,.18),transparent 65%)}
+.eyebrow{display:inline-block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);border:1px solid rgba(88,166,255,.35);border-radius:999px;padding:3px 12px;margin-bottom:18px}
+h1{font-size:clamp(30px,5.5vw,48px);line-height:1.12;margin:0 0 14px;letter-spacing:-.01em}
+.lead{font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:640px;margin:0 auto 30px}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:#fff;font-size:18px;font-weight:600;padding:14px 30px;border-radius:10px;box-shadow:0 6px 24px rgba(31,111,235,.35);transition:transform .12s,box-shadow .12s}
+.cta:hover{text-decoration:none;transform:translateY(-1px);box-shadow:0 10px 30px rgba(31,111,235,.45)}
+.cta span{transition:transform .12s} .cta:hover span{transform:translateX(3px)}
+.sub{margin-top:12px;font-size:13px;color:var(--muted)}
+/* live strip */
+#live{display:none;margin:8px 0 40px}
+#live .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.stat .k{font-size:12px;color:var(--muted)}
+.stat .v{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat .d{font-size:12px;font-variant-numeric:tabular-nums}
+.up{color:var(--green)} .dn{color:var(--red)} .flat{color:var(--muted)}
+.spark{margin-top:10px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.spark .k{font-size:12px;color:var(--muted);display:flex;justify-content:space-between}
+.spark svg{display:block;width:100%;height:70px;margin-top:6px}
+#live .asof{font-size:12px;color:var(--muted);margin-top:8px;text-align:right}
+/* features */
+h2{font-size:20px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.f{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.f b{display:block;margin-bottom:4px}
+.f p{margin:0;color:var(--muted);font-size:14px}
+.bottom{text-align:center;margin:44px 0 0}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--border);font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
 </style>
 </head>
 <body>
 <main>
-  <h1>Manas Bafna</h1>
-  <p class="muted">Markets, funding and data.</p>
+  <div class="top"><b>Manas Bafna</b><a href="https://funding.manasbafna.com/">Dashboard →</a></div>
 
-  <a class="card" href="https://funding.manasbafna.com/">
-    <b>Funding Markets Monitor →</b><br>
-    <span class="muted">A free daily dashboard of the US repo and money markets: SOFR, TGCR, BGCR and EFFR against the Fed's corridor, GC repo vs. IORB, Treasury net issuance, bank reserves and the Fed's balance sheet, primary dealer positioning, bills vs. SOFR, GSE cash week and month-end patterns, and SR1 − ZQ futures expiries.</span>
-  </a>
+  <section class="hero">
+    <div class="eyebrow">Free · updated every weekday</div>
+    <h1>Funding Markets Monitor</h1>
+    <p class="lead">Every number that drives the price of overnight cash in the US — repo rates, the Fed's corridor, Treasury supply and bank reserves — on one dashboard.</p>
+    <a class="cta" href="https://funding.manasbafna.com/">Open the dashboard <span>→</span></a>
+    <div class="sub">No sign-up. Works on desktop and mobile.</div>
+  </section>
 
-  <h2>What the monitor shows</h2>
-  <p>Overnight funding markets set the price of cash for the whole financial system. The monitor gathers the official public data in one place and updates it every weekday, so it is easy to see when cash is getting scarce or plentiful:</p>
-  <ul>
-    <li><b>Rates and spreads</b> — SOFR and the tri-party, broad and dealer GC repo rates relative to the Fed's interest on reserves (IORB), the ON RRP floor and the Standing Repo Facility.</li>
-    <li><b>Liquidity</b> — bank reserves, the Treasury General Account, ON RRP and SRF usage, and what moved reserves each week.</li>
-    <li><b>Supply</b> — estimated Treasury net issuance by settlement date and month, and the history of net marketable issuance.</li>
-    <li><b>Patterns</b> — how repo behaves during GSE cash week and around month- and quarter-ends.</li>
-  </ul>
-  <p class="muted">Sources: Federal Reserve Bank of New York, Federal Reserve Board (via FRED), U.S. Treasury (FiscalData, TreasuryDirect, daily yield curve), Office of Financial Research and DTCC. Figures are estimates for information only, not investment advice.</p>
+  <section id="live" aria-label="Latest prints">
+    <div class="row" id="stats"></div>
+    <div class="spark"><div class="k"><span>SOFR − IORB, last 3 months (bp)</span><span id="spk-v"></span></div><svg id="spk" viewBox="0 0 600 70" preserveAspectRatio="none"></svg></div>
+    <div class="asof" id="asof"></div>
+  </section>
 
-  <footer>© Manas Bafna · <a href="privacy.html">Privacy policy</a></footer>
+  <section>
+    <h2>What's inside</h2>
+    <div class="grid">
+      <div class="f"><b>Today at a glance</b><p>Latest SOFR, TGCR, BGCR, EFFR, DTCC GCF and DVP repo, key spreads, reserves and ON RRP, with daily and weekly changes.</p></div>
+      <div class="f"><b>Repo vs. the Fed's corridor</b><p>Overnight rates against IORB, the ON RRP floor and the Standing Repo Facility, plus SOFR's percentile distribution.</p></div>
+      <div class="f"><b>Treasury supply</b><p>Estimated net issuance by settlement date and month, upcoming auctions, and five years of monthly net issuance.</p></div>
+      <div class="f"><b>Reserves and the Fed</b><p>What moved bank reserves each week — Fed holdings, the TGA, reverse repos — and the Fed's holdings by type.</p></div>
+      <div class="f"><b>Seasonal patterns</b><p>GSE cash week and month- and quarter-end behaviour by year and month, with heat-map grids.</p></div>
+      <div class="f"><b>Futures and positioning</b><p>SR1 − ZQ expiry estimates, primary dealer Treasury positions and financing, bills vs. SOFR, 2y and 7y moves.</p></div>
+    </div>
+  </section>
+
+  <div class="bottom"><a class="cta" href="https://funding.manasbafna.com/">Open the dashboard <span>→</span></a></div>
+
+  <footer>
+    <span>Data: Federal Reserve Bank of New York, Federal Reserve Board (FRED), U.S. Treasury, Office of Financial Research, DTCC. For information only, not investment advice.</span>
+    <span>© Manas Bafna · <a href="privacy.html">Privacy policy</a></span>
+  </footer>
 </main>
+<script>
+// Latest prints from the dashboard's daily snapshot; the section stays hidden if it can't be loaded
+(async () => {
+  try {
+    const r = await fetch('https://funding.manasbafna.com/data/latest.json', {cache: 'no-cache'}); if (!r.ok) return;
+    const S = (await r.json()).series || {};
+    const rows = (id, k) => ((S[id] || {}).data || []).filter(x => x && typeof x[k] === 'number');
+    const last2 = (id, k) => { const a = rows(id, k); return a.length ? [a[a.length - 1], a[a.length - 2]] : [null, null]; };
+    const stepAt = (a, d, k) => { let v = null; for (const x of a) { if (x.d <= d) v = x[k]; else break; } return v; };
+    const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], dl = d => MON[+d.slice(5, 7) - 1] + ' ' + (+d.slice(8));
+    const iorb = rows('iorb', 'v'), sofr = rows('sofr', 'rate');
+    const chg = (v, unit) => { const c = Math.abs(v) < 0.05 ? 'flat' : v > 0 ? 'up' : 'dn'; return `<span class="${c}">${v > 0 ? '+' : ''}${v.toFixed(unit === 'bn' ? 0 : 1)} ${unit} vs prior</span>`; };
+    const cards = [];
+    const rate = (label, id, k, dec) => { const [a, b] = last2(id, k); if (!a) return; cards.push(`<div class="stat"><div class="k">${label} · ${dl(a.d)}</div><div class="v">${a[k].toFixed(dec)}%</div><div class="d">${b ? chg((a[k] - b[k]) * 100, 'bp') : ''}</div></div>`); };
+    rate('SOFR', 'sofr', 'rate', 2); rate('EFFR', 'effr', 'rate', 2); rate('DTCC GCF Treasury', 'dtcc', 'v', 3);
+    const spread = sofr.map(x => { const i = stepAt(iorb, x.d, 'v'); return i == null ? null : {d: x.d, v: Math.round((x.rate - i) * 1000) / 10}; }).filter(Boolean);
+    if (spread.length) { const a = spread[spread.length - 1], b = spread[spread.length - 2];
+      cards.push(`<div class="stat"><div class="k">SOFR − IORB · ${dl(a.d)}</div><div class="v">${a.v > 0 ? '+' : ''}${a.v.toFixed(1)} bp</div><div class="d">${b ? chg(a.v - b.v, 'bp') : ''}</div></div>`); }
+    const [res, resp] = last2('wresbal', 'v');
+    if (res) cards.push(`<div class="stat"><div class="k">Bank reserves · wk of ${dl(res.d)}</div><div class="v">$${(res.v / 1000).toFixed(2)}tn</div><div class="d">${resp ? chg(res.v - resp.v, 'bn') : ''}</div></div>`);
+    if (!cards.length) return;
+    document.getElementById('stats').innerHTML = cards.join('');
+    // sparkline: last ~3 months of SOFR − IORB
+    const sp = spread.slice(-63);
+    if (sp.length > 2) {
+      const vs = sp.map(x => x.v), lo = Math.min(...vs, 0), hi = Math.max(...vs, 0), y = v => 66 - (v - lo) / ((hi - lo) || 1) * 62, x = i => i / (sp.length - 1) * 600;
+      const pts = sp.map((p, i) => `${x(i).toFixed(1)},${y(p.v).toFixed(1)}`).join(' ');
+      document.getElementById('spk').innerHTML = `<line x1="0" x2="600" y1="${y(0)}" y2="${y(0)}" stroke="#8b949e" stroke-dasharray="4 4" stroke-width="1" vector-effect="non-scaling-stroke"/><polyline points="${pts}" fill="none" stroke="#58a6ff" stroke-width="2" vector-effect="non-scaling-stroke"/>`;
+      document.getElementById('spk-v').textContent = `range ${lo.toFixed(1)} to ${hi.toFixed(1)}`;
+    }
+    document.getElementById('asof').innerHTML = `From the dashboard's daily data · <a href="https://funding.manasbafna.com/">see everything →</a>`;
+    document.getElementById('live').style.display = 'block';
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
